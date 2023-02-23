@@ -1,5 +1,6 @@
 #include <iostream>
 #define MAX_SIZE 1000
+
 using namespace std;
 
 
@@ -12,8 +13,8 @@ void push(int data) {
         cout << "Stack overflow" << endl;
         return;
     }
-    top++;
-    arr[top] = data;
+   
+    arr[++top] = data;
 }
 
 void push_bottom(int data) {
@@ -33,8 +34,8 @@ int pop() {
         cout << "Stack underflow" << endl;
         return -1;
     }
-    int data = arr[top];
-    top--;
+    int data = arr[top--];
+  
     return data;
 }
 
@@ -63,19 +64,19 @@ void display() {
 }
 
 int main() {
-    int choice, data;
+    int option, data;
 
     do {
-        cout << "\n1. Push element on top\n";
-        cout << "2. Push element on bottom\n";
-        cout << "3. Pop element from top\n";
-        cout << "4. Pop element from bottom\n";
-        cout << "5. Display stack elements\n";
+        cout << "\n1. Push to top\n";
+        cout << "2. Push to bottom\n";
+        cout << "3. Pop from top\n";
+        cout << "4. Pop from bottom\n";
+        cout << "5. Display stack\n";
         cout << "6. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
+        cout << "Enter your option: ";
+        cin >> option;
 
-        switch (choice) {
+        switch (option) {
             case 1:
                 cout << "Enter element to push: ";
                 cin >> data;
@@ -107,7 +108,7 @@ int main() {
             default:
                 cout << "Invalid choice" << endl;
         }
-    } while (choice != 6);
+    } while (option != 6);
 
     return 0;
 }
