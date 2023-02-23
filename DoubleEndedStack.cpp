@@ -1,8 +1,8 @@
 #include <iostream>
-
+#define MAX_SIZE 1000
 using namespace std;
 
-const int MAX_SIZE = 100;
+
 
 int arr[MAX_SIZE];
 int top = -1;
@@ -38,6 +38,19 @@ int pop() {
     return data;
 }
 
+int pop_bottom() {
+    if (top == -1) {
+        cout << "Stack underflow" << endl;
+        return -1;
+    }
+    int data = arr[0];
+    for (int i = 0; i < top; i++) {
+        arr[i] = arr[i + 1];
+    }
+    top--;
+    return data;
+}
+
 void display() {
     if (top == -1) {
         cout << "Stack is empty" << endl;
@@ -56,8 +69,9 @@ int main() {
         cout << "\n1. Push element on top\n";
         cout << "2. Push element on bottom\n";
         cout << "3. Pop element from top\n";
-        cout << "4. Display stack elements\n";
-        cout << "5. Exit\n";
+        cout << "4. Pop element from bottom\n";
+        cout << "5. Display stack elements\n";
+        cout << "6. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
@@ -75,19 +89,25 @@ int main() {
             case 3:
                 data = pop();
                 if (data != -1) {
-                    cout << "Popped element is: " << data << endl;
+                    cout << "Popped element from top is: " << data << endl;
                 }
                 break;
             case 4:
-                display();
+                data = pop_bottom();
+                if (data != -1) {
+                    cout << "Popped element from bottom is: " << data << endl;
+                }
                 break;
             case 5:
+                display();
+                break;
+            case 6:
                 cout << "Exiting program..." << endl;
                 break;
             default:
                 cout << "Invalid choice" << endl;
         }
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
