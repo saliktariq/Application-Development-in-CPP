@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+Application-Development-in-CPP.dev
+*.layout
+*.win
+*.dev
