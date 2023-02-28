@@ -12,9 +12,12 @@ enum Turn {
 int main(){
 	
 	//seed random for variance in games
+	
+	//start position is -1 (starting at 0 off the board)
+	
 	int seed = time(NULL);
 	srand(seed);
-	//start position is -1 (starting at 0 off the board)
+	
 	int p1pos = -1, p2pos = -1, tileCount = 100, diceRoll;
 	
 	Turn currentTurn = PLAYER_1_TURN;
