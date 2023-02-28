@@ -34,3 +34,6 @@ Application-Development-in-CPP.dev
 *.layout
 *.win
 *.dev
+*.dev
+*.win
+*.win
