@@ -3,6 +3,8 @@
 #include <utility>
 #include <vector>
 #include <ctime>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -15,7 +17,8 @@ int main()
 
 
 for (int i = 0; i < 100; i++) {
-    board[i] = "[ ]";
+	string s = "[ ]";
+    board[i] = s;
 }
 
 
@@ -47,14 +50,14 @@ board[74] = "ST"; // Snake tail at position 75
     vector< pair<int, int> > ladder; 
     vector< pair<int, int> > snake;
 
-    ladder.push_back(std::make_pair(6,46));
-    ladder.push_back(std::make_pair(19,43));
-    ladder.push_back(std::make_pair(52,71));
-    ladder.push_back(std::make_pair(57,98));
+    ladder.push_back(make_pair(6,46));
+    ladder.push_back(make_pair(19,43));
+    ladder.push_back(make_pair(52,71));
+    ladder.push_back(make_pair(57,98));
 
-    snake.push_back(std::make_pair(47,9));
-    snake.push_back(std::make_pair(62,40));
-    snake.push_back(std::make_pair(96,75));
+    snake.push_back(make_pair(47,9));
+    snake.push_back(make_pair(62,40));
+    snake.push_back(make_pair(96,75));
 
     unsigned int ladderSize = ladder.size();
     unsigned int snakeSize = snake.size();
@@ -151,7 +154,7 @@ cout <<"\n\n\n";
                 currentPlayer = 1;
             }
         }
-    } while (option == 1);
+    } while (true);
 
     return 0;
 }
