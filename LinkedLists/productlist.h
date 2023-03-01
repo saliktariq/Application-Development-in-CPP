@@ -122,22 +122,20 @@ void sortProductByPrice(){
 	if(head == NULL){
 		cout <<"Product List Empty\n";
 	} else {
-		Product *currentProduct, *minProduct, *tempProduct;
-		for(currentProduct = head; currentProduct->next != NULL; currentProduct = currentProduct->next){
-			minProduct = currentProduct;
-			for(Product *p = currentProduct->next; p != NULL; p = p->next){
-				if(p->price < minProduct->price){
-					minProduct = p;
+		Product *tempProduct;
+		bool swapped;
+		do {
+			swapped = false;
+			for(Product *p = head; p->next != NULL; p = p->next){
+				if(p->price > p->next->price){
+					tempProduct = p;
+					p = p->next;
+					tempProduct->next = p->next;
+					p->next = tempProduct;
+					swapped = true;
 				}
 			}
-			if(minProduct != currentProduct){
-				tempProduct = currentProduct;
-				currentProduct = minProduct;
-				tempProduct->next = currentProduct->next;
-				currentProduct->next = tempProduct;
-				currentProduct = tempProduct;
-			}
-		}
+		} while(swapped);
 		cout<<"Products sorted by price\n";
 	}
 }

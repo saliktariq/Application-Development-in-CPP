@@ -6,8 +6,8 @@ using namespace std;
 
 int main(){
 	//Setting some colours to terminal
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hConsole,2);
+	HANDLE myConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(myConsole,2);
 	system("cls");	
 	//End of styling
 	
