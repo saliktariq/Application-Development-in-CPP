@@ -181,3 +181,30 @@ Node* min(){
 	
 	return minimumNode;
 }
+
+void swapAlternative() {
+    if (head == NULL || head->next == NULL) {
+        return;
+    }
+    Node* prevNode = NULL;
+    Node* currNode = head;
+    Node* nextNode = head->next;
+
+    while (nextNode != NULL) {
+        currNode->next = nextNode->next;
+        nextNode->next = currNode;
+        if (prevNode != NULL) {
+            prevNode->next = nextNode;
+        } else {
+            head = nextNode;
+        }
+        prevNode = currNode;
+        currNode = currNode->next;
+        if (currNode != NULL) {
+            nextNode = currNode->next;
+        } else {
+            nextNode = NULL;
+        }
+    }
+}
+
