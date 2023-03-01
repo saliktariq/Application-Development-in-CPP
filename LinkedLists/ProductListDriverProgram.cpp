@@ -59,13 +59,13 @@ int main(){
 
 				cout << "Total price for all products:\t" << calculateTotalPrice() <<;
 				break;
-//			case 5:
-//				sortProductByCategory();
-//				break;
-//			case 6:
-//				sortProductByPrice();
-//				break;
-//				
+			case 5:
+				sortProductByCategory();
+				break;
+			case 6:
+				sortProductByPrice();
+				break;
+				
 			case 7: 
 			{
 				listAllProducts(); break;
