@@ -8,8 +8,12 @@ int main(){
 	//Setting some colours to terminal
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole,
-	FOREGROUND_GREEN | BACKGROUND_RED);
+	FOREGROUND_GREEN | BACKGROUND_BLUE);
 	system("cls");	
+	//End of styling
+	
+	
+	
 		int choice;
 
 	do{
