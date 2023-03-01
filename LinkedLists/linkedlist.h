@@ -132,3 +132,52 @@ void displayList(){
 		}
 	}
 }
+
+Node* at(int position){
+	if(position < 1 || position > count){
+		return NULL;
+	}
+	Node *tempNode = head;
+	for(int i=1; i<position; i++){
+		tempNode = tempNode->next;
+	}
+	return tempNode;
+}
+
+Node* max(){
+	
+	if(head == NULL){
+		return NULL;
+	}
+	
+	Node* maximumNode = head;
+	Node* nextNode = head->next;
+	while(nextNode!=NULL){
+		if(nextNode->data > maximumNode->data){
+			maximumNode = nextNode;
+		}
+		
+		nextNode = nextNode->next;
+	}
+	
+	return maximumNode;
+	
+}
+
+Node* min(){
+		if(head == NULL){
+		return NULL;
+	}
+	
+	Node* minimumNode = head;
+	Node* nextNode = head->next;
+	while(nextNode!=NULL){
+		if(nextNode->data < minimumNode->data){
+			minimumNode = nextNode;
+		}
+		
+		nextNode = nextNode->next;
+	}
+	
+	return minimumNode;
+}

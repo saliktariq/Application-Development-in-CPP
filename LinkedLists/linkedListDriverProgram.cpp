@@ -7,7 +7,7 @@ int main(){
 
 	do{
 		
-		cout<<"\n\t1: Insert at beginning of list\n\t\n\t2: Insert at end of list\n\t\n\t3: Insert at position 'n' of list\n\t\n\t4: Display linkedList\n\t\n\t5: Delete from start of list\n\t\n\t6: Delete from end of list\n\t\n\t7: Delete from position n\n\t\n\t0: Exit"<<endl;
+		cout<<"\n\t1: Insert at beginning of list\n\t\n\t2: Insert at end of list\n\t\n\t3: Insert at position 'n' of list\n\t\n\t4: Display linkedList\n\t\n\t5: Delete from start of list\n\t\n\t6: Delete from end of list\n\t\n\t7: Delete from position n\n\t\n\t8: Return data at position n\n\t\n\t9: Maximum value\n\t\n\t10: Minimum value\n\t\n\t0: Exit"<<endl;
 		cin>>choice;
 		switch(choice){
 			case 0:
@@ -45,6 +45,23 @@ int main(){
 				cout<<"Enter position (starting from 1):\t";
 				cin>>pos;
 				deleteFromPosition(pos);
+				break;
+			case 8:
+				cout<<"Enter position (starting from 1):\t";
+				cin>>pos;
+				cout<< at(pos)->data;
+				break;
+			case 9:
+					if(max() == NULL){
+					cout<<"\tList empty\n";
+				}
+				cout<< max()->data;
+				break;
+			case 10:
+				if(min() == NULL){
+					cout<<"\tList empty\n";
+				}
+				cout<< min()->data;
 				break;
 			default:
 				cout<<"\n Illegal choice \n";
