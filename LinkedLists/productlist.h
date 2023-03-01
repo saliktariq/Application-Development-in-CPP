@@ -98,78 +98,83 @@ int calculateTotalPrice(){
 
 void sortProductByCategory(){
 	
-	Product *current = head;
-	Product *minimumCatProduct = NULL;
-	while(current->next!=NULL){
-		minimumCatProduct = current;
-		Product* tempProduct = current->next;
-		while(tempProduct!=NULL){
-			if(tempProduct->category < minimumCatProduct->category){
-				minimumCatProduct = tempProduct;
-			}
-			tempProduct= tempProduct->next;
-		}
-		
-		if(current != minimumCatProduct){
-			tempProduct->category = current->category;
-			tempProduct->pid = current->pid;
-			tempProduct->pname = current->pname;
-			tempProduct->price = current->price;
-			
-			current->category = minimumCatProduct->category;
-			current->pid = minimumCatProduct->pid;
-			current->pname = minimumCatProduct->pname;
-			current->price = minimumCatProduct->price;
-			
-			minimumCatProduct->category = tempProduct->category;
-			minimumCatProduct->pid = tempProduct->pid;
-			minimumCatProduct->pname = tempProduct->pname;
-			minimumCatProduct->price = tempProduct->price;
-			
-		}
-		current= current->next;
-		
-	}
-	
-
+    if (head == NULL || head->next == NULL) {
+        return;
+    }
+    
+    bool swapped;
+    Product *ptr1;
+    Product *lptr = NULL;
+    
+    do {
+        swapped = false;
+        ptr1 = head;
+        
+        while (ptr1->next != lptr) {
+            if (ptr1->category > ptr1->next->category) {
+                
+                int temp_pid = ptr1->pid;
+                string temp_pname = ptr1->pname;
+                int temp_price = ptr1->price;
+                int temp_category = ptr1->category;
+                
+                ptr1->pid = ptr1->next->pid;
+                ptr1->pname = ptr1->next->pname;
+                ptr1->price = ptr1->next->price;
+                ptr1->category = ptr1->next->category;
+                
+                ptr1->next->pid = temp_pid;
+                ptr1->next->pname = temp_pname;
+                ptr1->next->price = temp_price;
+                ptr1->next->category = temp_category;
+                
+                swapped = true;
+            }
+            ptr1 = ptr1->next;
+        }
+        lptr = ptr1;
+    } while (swapped);
 }
 
 void sortProductByPrice(){
-	
-		Product *current = head;
-	Product *minimumCatProduct = NULL;
-	while(current->next!=NULL){
-		minimumCatProduct = current;
-		Product* tempProduct = current->next;
-		while(tempProduct!=NULL){
-			if(tempProduct->price < minimumCatProduct->price){
-				minimumCatProduct = tempProduct;
-			}
-			tempProduct= tempProduct->next;
-		}
-		
-		if(current != minimumCatProduct){
-			tempProduct->category = current->category;
-			tempProduct->pid = current->pid;
-			tempProduct->pname = current->pname;
-			tempProduct->price = current->price;
-			
-			current->category = minimumCatProduct->category;
-			current->pid = minimumCatProduct->pid;
-			current->pname = minimumCatProduct->pname;
-			current->price = minimumCatProduct->price;
-			
-			minimumCatProduct->category = tempProduct->category;
-			minimumCatProduct->pid = tempProduct->pid;
-			minimumCatProduct->pname = tempProduct->pname;
-			minimumCatProduct->price = tempProduct->price;
-			
-		}
-		current= current->next;
-		
-	}
-
+    if (head == NULL || head->next == NULL) {
+        return;
+    }
+    
+    bool swapped;
+    Product *ptr1;
+    Product *lptr = NULL;
+    
+    do {
+        swapped = false;
+        ptr1 = head;
+        
+        while (ptr1->next != lptr) {
+            if (ptr1->price > ptr1->next->price) {
+                
+                int temp_pid = ptr1->pid;
+                string temp_pname = ptr1->pname;
+                int temp_price = ptr1->price;
+                int temp_category = ptr1->category;
+                
+                ptr1->pid = ptr1->next->pid;
+                ptr1->pname = ptr1->next->pname;
+                ptr1->price = ptr1->next->price;
+                ptr1->category = ptr1->next->category;
+                
+                ptr1->next->pid = temp_pid;
+                ptr1->next->pname = temp_pname;
+                ptr1->next->price = temp_price;
+                ptr1->next->category = temp_category;
+                
+                swapped = true;
+            }
+            ptr1 = ptr1->next;
+        }
+        lptr = ptr1;
+    } while (swapped);
 }
+
 
 
 void listAllProducts(){
