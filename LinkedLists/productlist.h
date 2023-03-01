@@ -97,47 +97,11 @@ int calculateTotalPrice(){
 
 
 void sortProductByCategory(){
-	if(head == NULL){
-		cout <<"Product List Empty\n";
-	} else {
-		Product *tempProduct;
-		bool swapped;
-		do {
-			swapped = false;
-			for(Product *p = head; p->next != NULL; p = p->next){
-				if(p->category > p->next->category){
-					tempProduct = p;
-					p = p->next;
-					tempProduct->next = p->next;
-					p->next = tempProduct;
-					swapped = true;
-				}
-			}
-		} while(swapped);
-		cout<<"Products sorted by category\n";
-	}
+
 }
 
 void sortProductByPrice(){
-	if(head == NULL){
-		cout <<"Product List Empty\n";
-	} else {
-		Product *tempProduct;
-		bool swapped;
-		do {
-			swapped = false;
-			for(Product *p = head; p->next != NULL; p = p->next){
-				if(p->price > p->next->price){
-					tempProduct = p;
-					p = p->next;
-					tempProduct->next = p->next;
-					p->next = tempProduct;
-					swapped = true;
-				}
-			}
-		} while(swapped);
-		cout<<"Products sorted by price\n";
-	}
+
 }
 
 
