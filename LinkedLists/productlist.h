@@ -100,7 +100,7 @@ void sortProductByCategory(){
 	
 	Product *current = head;
 	Product *minimumCatProduct = NULL;
-	while(current->next!=null){
+	while(current->next!=NULL){
 		minimumCatProduct = current;
 		Product* tempProduct = current->next;
 		while(tempProduct!=NULL){
@@ -138,7 +138,7 @@ void sortProductByPrice(){
 	
 		Product *current = head;
 	Product *minimumCatProduct = NULL;
-	while(current->next!=null){
+	while(current->next!=NULL){
 		minimumCatProduct = current;
 		Product* tempProduct = current->next;
 		while(tempProduct!=NULL){
