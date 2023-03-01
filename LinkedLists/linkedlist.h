@@ -214,13 +214,16 @@ void sort(int start, int end) {
         cout << "Start should be less than End\n";
         return;
     }
+    if(start < 0 || end > count){
+    	cout<< "Invalid input! \n";
+    	return;
+	}
     Node* current = at(start);
     Node* minNode = NULL;
 
     int endCounter = end - start ;
-    minNode = current;
-    while (endCounter > 0) {
-        
+    while (endCounter >= 0) {
+        minNode = current;
         Node* tempNode = current->next;
         while (tempNode != NULL) {
             if (tempNode->data < minNode->data) {
@@ -228,13 +231,14 @@ void sort(int start, int end) {
             }
             tempNode = tempNode->next;
         }
-        
-	//todo
-        
+        if (current != minNode) {
+            int tempData = current->data;
+            current->data = minNode->data;
+            minNode->data = tempData;
+        }
+        current = current->next;
         endCounter--;
     }
-
-    displayList();
+    cout << "List sorted from position " << start << " to position " << end << endl;
 }
-
 

@@ -97,10 +97,77 @@ int calculateTotalPrice(){
 
 
 void sortProductByCategory(){
+	
+	Product *current = head;
+	Product *minimumCatProduct = NULL;
+	while(current->next!=null){
+		minimumCatProduct = current;
+		Product* tempProduct = current->next;
+		while(tempProduct!=NULL){
+			if(tempProduct->category < minimumCatProduct->category){
+				minimumCatProduct = tempProduct;
+			}
+			tempProduct= tempProduct->next;
+		}
+		
+		if(current != minimumCatProduct){
+			tempProduct->category = current->category;
+			tempProduct->pid = current->pid;
+			tempProduct->pname = current->pname;
+			tempProduct->price = current->price;
+			
+			current->category = minimumCatProduct->category;
+			current->pid = minimumCatProduct->pid;
+			current->pname = minimumCatProduct->pname;
+			current->price = minimumCatProduct->price;
+			
+			minimumCatProduct->category = tempProduct->category;
+			minimumCatProduct->pid = tempProduct->pid;
+			minimumCatProduct->pname = tempProduct->pname;
+			minimumCatProduct->price = tempProduct->price;
+			
+		}
+		current= current->next;
+		
+	}
+	
 
 }
 
 void sortProductByPrice(){
+	
+		Product *current = head;
+	Product *minimumCatProduct = NULL;
+	while(current->next!=null){
+		minimumCatProduct = current;
+		Product* tempProduct = current->next;
+		while(tempProduct!=NULL){
+			if(tempProduct->price < minimumCatProduct->price){
+				minimumCatProduct = tempProduct;
+			}
+			tempProduct= tempProduct->next;
+		}
+		
+		if(current != minimumCatProduct){
+			tempProduct->category = current->category;
+			tempProduct->pid = current->pid;
+			tempProduct->pname = current->pname;
+			tempProduct->price = current->price;
+			
+			current->category = minimumCatProduct->category;
+			current->pid = minimumCatProduct->pid;
+			current->pname = minimumCatProduct->pname;
+			current->price = minimumCatProduct->price;
+			
+			minimumCatProduct->category = tempProduct->category;
+			minimumCatProduct->pid = tempProduct->pid;
+			minimumCatProduct->pname = tempProduct->pname;
+			minimumCatProduct->price = tempProduct->price;
+			
+		}
+		current= current->next;
+		
+	}
 
 }
 
