@@ -208,3 +208,33 @@ void swapAlternative() {
     }
 }
 
+
+void sort(int start, int end) {
+    if (start >= end) {
+        cout << "Start should be less than End\n";
+        return;
+    }
+    Node* current = at(start);
+    Node* minNode = NULL;
+
+    int endCounter = end - start ;
+    minNode = current;
+    while (endCounter > 0) {
+        
+        Node* tempNode = current->next;
+        while (tempNode != NULL) {
+            if (tempNode->data < minNode->data) {
+                minNode = tempNode;
+            }
+            tempNode = tempNode->next;
+        }
+        
+	//todo
+        
+        endCounter--;
+    }
+
+    displayList();
+}
+
+
