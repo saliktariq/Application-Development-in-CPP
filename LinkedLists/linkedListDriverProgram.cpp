@@ -7,7 +7,12 @@ int main(){
 
 	do{
 		
-		cout<<"\n\t1: Insert at beginning of list\n\t\n\t2: Insert at end of list\n\t\n\t3: Insert at position 'n' of list\n\t\n\t4: Display linkedList\n\t\n\t5: Delete from start of list\n\t\n\t6: Delete from end of list\n\t\n\t7: Delete from position n\n\t\n\t8: Return data at position n\n\t\n\t9: Maximum value\n\t\n\t10: Minimum value\n\t\n\t0: Exit"<<endl;
+		cout<<"\t1: Insert at beginning of list\n\t\n\t2: Insert at end of list\n\t\n\t";
+		cout<<"3: Insert at position 'n' of list\n\t\n\t4: Display linkedList\n\t\n\t";
+		cout<<"5: Delete from start of list\n\t\n\t6: Delete from end of list\n\t\n\t";
+		cout<<"7: Delete from position n\n\t\n\t8: Return data at position n\n\t\n\t";
+		cout<<"9: Maximum value\n\t\n\t10: Minimum value\n\t\n\t0: Exit"<<endl;
+		cout<<"\n\t";
 		cin>>choice;
 		switch(choice){
 			case 0:
