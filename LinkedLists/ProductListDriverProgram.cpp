@@ -1,10 +1,15 @@
 #include <iostream>
 #include "productlist.h"
+#include <windows.h>
 
 using namespace std;
 
 int main(){
-	
+	//Setting some colours to terminal
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole,
+	FOREGROUND_GREEN | BACKGROUND_RED);
+	system("cls");	
 		int choice;
 
 	do{
@@ -57,7 +62,7 @@ int main(){
 
 			case 4:
 
-				cout << "Total price for all products:\t" << calculateTotalPrice() <<;
+				cout << "Total price for all products:\t" << calculateTotalPrice();
 				break;
 			case 5:
 				sortProductByCategory();
