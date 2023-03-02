@@ -71,7 +71,7 @@ void displayParentList() {
     } else {
         cout << "List Elements are: \n";
         for (Node* p = head; p != NULL; p = p->down) {
-            cout << p->data << "-->";
+            cout << p->data << " : ";
             for (ChildNode* q = p->next; q != NULL; q = q->next) {
                 cout << q->data << "-->";
             }
@@ -79,5 +79,32 @@ void displayParentList() {
         }
     }
 }
+
+void deleteNode(int searchAndDelete) {
+
+	
+    for (Node* p = head; p != NULL; p = p->down) {
+        ChildNode* prevNode = NULL;
+        for (ChildNode* q = p->next; q != NULL;) {
+            if (q->data == searchAndDelete) {
+                ChildNode* toDelete = q;
+                q = q->next;
+                
+                if (prevNode == NULL) {
+                    p->next = toDelete->next;
+                } else {
+                    prevNode->next = toDelete->next;
+                }
+                
+                delete toDelete;
+            } else {
+                prevNode = q;
+                q = q->next;
+            }
+        }
+    }
+}
+
+
 
 

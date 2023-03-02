@@ -13,6 +13,10 @@ int main(){
 	
 	displayParentList();
 	
+	deleteNode(20);
+	
+	
+	displayParentList();
 	
 	return 0;
 }
