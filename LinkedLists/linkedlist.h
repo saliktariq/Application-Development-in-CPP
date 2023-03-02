@@ -126,7 +126,7 @@ void displayList(){
 	if(head == NULL){
 		cout <<"List Empty\n";
 	} else {
-		cout <<"List Elements are: \n\t\t\t";
+		cout <<"List Elements are: \n";
 		for(Node *p = head; p!=NULL; p=p->next){
 			cout<<p->data<<"-->";
 		}
