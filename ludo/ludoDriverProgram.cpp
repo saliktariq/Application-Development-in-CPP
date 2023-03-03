@@ -39,7 +39,8 @@ int main(){
 	Node *nodeAtCurrentPos;
 	
 	do {
-		displayBoard();
+		displayBoard(); //not implemented yet
+		
 		cout<< "Press 1 to roll the dice...\n";
 		cin >> choice;
 		
