@@ -15,7 +15,8 @@ int rollDice() {
         initialized = true;
     }
     int randomNumber = rand() % 4 + 1;
-    cout<< "\n\n You rolled a " << randomNumber << "\n\n"<< endl;
+    cout<< "\n\nYou rolled a " << randomNumber << "\n\n"<< endl;
+	Beep (330,100);
     return randomNumber;
 }
 

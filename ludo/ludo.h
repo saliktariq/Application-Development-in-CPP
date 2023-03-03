@@ -100,6 +100,8 @@ void setup(){
 	updateNodeAtPosition(27, true, playersAtThisPosition);	
 	updateNodeAtPosition(31, true, playersAtThisPosition);	
 	updateNodeAtPosition(35, true, playersAtThisPosition);	
+	
+	
 }
 
 void display() {
