@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
@@ -153,6 +154,19 @@ public:
 
 ProductList *ProductList::instance = nullptr;
 
+void display_products() {
+    ProductList *productList = ProductList::getInstance();
+    CategoryList *categoryList = CategoryList::getInstance();
+    vector<Product> products = productList->getProducts();
+
+    cout << setw(5) << "pid" << setw(15) << "pname" << setw(10) << "price" << setw(10) << "catid" << setw(15) << "catname" << endl;
+    for (auto &product : products) {
+        Category *category = categoryList->searchCategory(product.getCatId());
+        cout << setw(5) << product.getPID() << setw(15) << product.getPName() << setw(10) << product.getPrice() << setw(10) << product.getCatId() << setw(15) << category->getCatName() << endl;
+    }
+}
+
+
 
 int main() {
     CategoryList *categoryList = CategoryList::getInstance();
@@ -166,7 +180,8 @@ int main() {
         cout << "2. Add Product" << endl;
         cout << "3. Search Category" << endl;
         cout << "4. Search Product" << endl;
-        cout << "5. Exit" << endl;
+        cout << "5. List All Product" << endl;
+        cout << "6. Exit" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
 
@@ -238,7 +253,11 @@ int main() {
                 }
                 break;
             }
-            case 5: {
+            
+            case 5:
+            	display_products();
+            	break;
+            case 6: {
                 break;
             }
             default: {
@@ -247,7 +266,7 @@ int main() {
             }
         }
 
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
