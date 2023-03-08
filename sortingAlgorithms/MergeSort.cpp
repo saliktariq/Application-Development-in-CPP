@@ -11,9 +11,9 @@ int generateRandomNumber(int minVal, int maxVal){
 
 void mergeDown(int arrayLeft[], int sizeLeft, int arrayRight[], int sizeRight, int arrayOriginal[], int sizeOriginal){
 	
-	int i = 0; // marker for arrayLeft
-	int j = 0; // marker for arrayRight
-	int k = 0; //marker for arrayOriginal
+	int i = 0;
+	int j = 0;
+	int k = 0;
 	
 	while(i < sizeLeft && j < sizeRight){
 		if(arrayLeft[i] < arrayRight[j]){
@@ -68,8 +68,11 @@ void mergeSort(int inputArray[], int n){
 }
 
 int main(){
-
+	
+	//seeding random function with null pointer
 	std::srand(std::time(nullptr));
+	
+	
 	int arrayA[10];
 	for(int i = 0; i < 10; i++){
 		arrayA[i] = generateRandomNumber(1,101);
