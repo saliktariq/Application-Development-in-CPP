@@ -13,7 +13,7 @@ class MinHeap{
         }
 
         int get_parent(int i){
-            return (i-1)/2;
+            return (i-1)/2; //parent is at (i-1) / 2 not at i/2
         }
 
         void insert(int val){
