@@ -30,7 +30,8 @@ class ItemToPurchase{
 		ItemToPurchase(string name, string description, int price, int quantity);
 		
 		//Member functions
-		void PrintItemCost();
+		void PrintItemCost() const;
+		void PrintItemDescription() const;
 		
 		
 		

@@ -1,5 +1,7 @@
 #include <iostream>
 #include "ItemToPurchase.h"
+#include<math.h>
+
 
 using namespace std;
 
@@ -24,7 +26,8 @@ int ItemToPurchase::GetPrice() const{
 }
 
 void ItemToPurchase::SetPrice(int price){
-	this->itemPrice = price;
+
+	this->itemPrice = ceil(price);
 }
 
 int ItemToPurchase::GetQuantity() const{
@@ -32,7 +35,7 @@ int ItemToPurchase::GetQuantity() const{
 }
 
 void ItemToPurchase::SetQuantity(int quantity){
-	this->itemQuantity = quantity;
+	this->itemQuantity = ceil(quantity);
 }
 
 string ItemToPurchase::GetDescription() const{
@@ -43,4 +46,10 @@ void ItemToPurchase::SetDescription(string description){
 	this->itemDescription = description;
 }
 
+void ItemToPurchase::PrintItemCost() const{
+	cout<< this->GetName()<<" "<<this->GetQuantity()<<" @ $"<<this->GetPrice()<<" = $"<<this->GetQuantity() * this->GetPrice() << endl;
+}
+void ItemToPurchase::PrintItemDescription() const{
+	cout<< this->GetName()<<": "<<this->GetDescription()<< endl;
+}
 
