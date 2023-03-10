@@ -230,20 +230,20 @@ void backup_menu() {
     int op;
     do {
 
-        cout << "\033[10;8H\033[1;33;44m  SYSTEM BACKUP  \033[0m";
-        cout << "\033[11;8H\033[1;33m------------------\033[0m" << endl;
-        cout << "\033[12;8H\033[1;33m1. Backup flight data to disk\033[0m" << endl;
-        cout << "\033[13;8H\033[1;33m2. Backup bookings data to disk\033[0m" << endl;
-        cout << "\033[14;8H\033[1;33m3. Backup passenger data to disk\033[0m" << endl;
-        cout << "\033[15;8H\033[1;31m0. Back\033[0m" << endl;
+        cout << "\033[2;5H\033[1;33;44m  SYSTEM BACKUP  \033[0m";
+        cout << "\033[4;6H\033[1;33m------------------\033[0m" << endl;
+        cout << "\033[5;6H\033[1;35m1. Backup flight data to disk\033[0m" << endl;
+        cout << "\033[6;6H\033[1;36m2. Backup bookings data to disk\033[0m" << endl;
+        cout << "\033[7;6H\033[1;37m3. Backup passenger data to disk\033[0m" << endl;
+        cout << "\033[8;6H\033[1;31m0. Back\033[0m" << endl;
         cout << endl;
-        cout << "Enter your choice: ";
+        cout << "\033[10;6H\033[1;33mEnter your choice:\033[0m";
         cin >> op;
         switch (op) {
 
         case 0:
         {
-            beep();
+
             system("cls");
             print_menu();
             break;
@@ -282,20 +282,20 @@ void json_menu() {
     int ch;
     do {
 
-        cout << "\033[10;8H\033[1;33;44m  JSON FEEDS  \033[0m";
-        cout << "\033[11;8H\033[1;33m------------------\033[0m" << endl;
-        cout << "\033[12;8H\033[1;33m1. View all flights as JSON\033[0m" << endl;
-        cout << "\033[13;8H\033[1;33m2. View all bookings as JSON\033[0m" << endl;
-        cout << "\033[14;8H\033[1;33m3. View all passengers as JSON\033[0m" << endl;
-        cout << "\033[15;8H\033[1;31m0. Back\033[0m" << endl;
+
+        cout << "\033[2;6H\033[1;33;44m  JSON FEEDS  \033[0m";
+        cout << "\033[4;6H\033[1;33m------------------\033[0m" << endl;
+        cout << "\033[5;6H\033[1;35m1. View all flights as JSON\033[0m" << endl;
+        cout << "\033[6;6H\033[1;36m2. View all bookings as JSON\033[0m" << endl;
+        cout << "\033[7;6H\033[1;37m3. View all passengers as JSON\033[0m" << endl;
+        cout << "\033[8;6H\033[1;31m0. Back\033[0m" << endl;
         cout << endl;
-        cout << "Enter your choice: ";
+        cout << "\033[10;6H\033[1;33mEnter your choice:\033[0m";
         cin >> ch;
         switch (ch) {
 
         case 0:
         {
-            beep();
             system("cls");
             print_menu();
             break;
@@ -331,18 +331,18 @@ void json_menu() {
 
 void print_menu() {
        
-    cout << "\033[2;6H\033[1;33;44m  FLIGHT BOOKING  \033[0m";
-    cout << "\033[4;6H\033[1;33m------------------\033[0m" << endl;
-    cout << "\033[5;6H\033[1;33m1. Add passenger\033[0m" << endl;
-    cout << "\033[6;6H\033[1;33m2. Add flight\033[0m" << endl;
+    cout << "\033[2;6H\033[1;33;44;1m  FLIGHT BOOKING  \033[0m";
+    cout << "\033[4;6H\033[1;30m------------------\033[0m" << endl;
+    cout << "\033[5;6H\033[1;31m1. Add passenger\033[0m" << endl;
+    cout << "\033[6;6H\033[1;32m2. Add flight\033[0m" << endl;
     cout << "\033[7;6H\033[1;33m3. Add booking\033[0m" << endl;
     cout << "\033[8;6H\033[1;34m4. View all passengers\033[0m" << endl;
     cout << "\033[9;6H\033[1;34m5. View all flights\033[0m" << endl;
-    cout << "\033[10;6H\033[1;34m6. View all bookings\033[0m" << endl;
-    cout << "\033[11;6H\033[1;34m7. View bookings for a passenger\033[0m" << endl;
-    cout << "\033[12;6H\033[1;34m8. View bookings for a flight\033[0m" << endl;
-    cout << "\033[13;6H\033[1;34m9. View JSON Feeds\033[0m" << endl;
-    cout << "\033[14;6H\033[1;34m10. Backup data to local disk\033[0m" << endl;
+    cout << "\033[10;6H\033[1;35m6. View all bookings\033[0m" << endl;
+    cout << "\033[11;6H\033[1;36m7. View bookings for a passenger\033[0m" << endl;
+    cout << "\033[12;6H\033[1;36m8. View bookings for a flight\033[0m" << endl;
+    cout << "\033[13;6H\033[1;37m9. View JSON Feeds\033[0m" << endl;
+    cout << "\033[14;6H\033[1;38m10. Backup data to local disk\033[0m" << endl;
     cout << "\033[15;6H\033[1;31m0. Exit\033[0m" << endl;
     cout << endl;
 }
@@ -356,7 +356,7 @@ int main() {
     int choice;
     do {
 
-        cout << "Enter your choice: ";
+        cout << "\033[17;6H\033[1;33mEnter your choice:\033[0m";
         cin >> choice;
 
         switch (choice) {
