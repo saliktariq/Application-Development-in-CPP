@@ -250,19 +250,19 @@ void backup_menu() {
         }
         case 1:
         {
-            json_feed_flight(flights);
+            save_feed_flight(flights);
             break;
 
 
         }
         case 2:
         {
-            json_feed_bookings(bookings);
+            save_feed_bookings(bookings);
             break;
         }
         case 3:
         {
-            json_feed_passengers;
+            save_feed_passengers(passengers);
             break;
 
         }
@@ -375,6 +375,7 @@ int main() {
             cout << "Enter passenger address: ";
             getline(cin, address);
             passengers.push_back(Passenger(id, name, email, password, address));
+            cout << "Your passenger account has been created successfully!\n";
             break;
         }
         case 2: {
@@ -397,6 +398,7 @@ int main() {
             cout << "Enter capacity: ";
             cin >> capacity;
             flights.push_back(Flight(id, departure, arrival, date, time, price, capacity));
+            cout << "New flight is successfully added to system!\n";
             break;
         }
         case 3: {
@@ -415,6 +417,7 @@ int main() {
             cout << "Has the booking been paid for? (0 for no, 1 for yes): ";
             cin >> paid;
             bookings.push_back(Booking(id, flights[flightId], passengers[passengerId], seatNum, upgrade, paid));
+            cout << "Your flight booking is created!\n";
             break;
         }
         case 4: {
