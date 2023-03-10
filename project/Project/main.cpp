@@ -314,7 +314,7 @@ void json_menu() {
         }
         case 3:
         {
-            json_feed_passengers(passengers);
+            json_feed_passengers;
             break;
 
         }
