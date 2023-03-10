@@ -15,11 +15,12 @@ public:
     bool isPaid() const;
     double getPrice() const;
     std::string toString() const;
+    const Flight& flight_; // reference to the Flight object
+    const Passenger& passenger_; // reference to the Passenger object
 
 private:
     int id_;
-    const Flight& flight_; // reference to the Flight object
-    const Passenger& passenger_; // reference to the Passenger object
+
     int seatNum_;
     bool upgrade_;
     bool paid_;
