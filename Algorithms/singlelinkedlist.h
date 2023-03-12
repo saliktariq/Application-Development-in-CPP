@@ -1,4 +1,9 @@
+#ifndef SINGLELINKEDLIST_H
+#define SINGLELINKEDLIST_H
+
 #include "singlenode.h"
+#include<iostream>
+
 
 /* Very important note to self: In most operations in linkedlist, we need three references (three nodes); head (representing start of the list),
 current (representing current node which will alter the node)
@@ -172,3 +177,4 @@ public:
 	}
 
 };
+#endif

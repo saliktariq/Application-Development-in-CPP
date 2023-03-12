@@ -127,10 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="doublelinkedlist.h" />
+    <ClInclude Include="doublenode.h" />
     <ClInclude Include="singlelinkedlist.h" />
     <ClInclude Include="singlenode.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DoubleLinkedListDriver.cpp" />
     <ClCompile Include="SingleLinkedListDriver.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

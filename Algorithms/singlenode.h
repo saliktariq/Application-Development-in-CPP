@@ -1,4 +1,5 @@
-#include <iostream>
+#ifndef SINGLENODE_H
+#define SINGLENODE_H
 
 class SingleNode {
 public:
@@ -10,3 +11,4 @@ public:
 		next = nullptr;
 	}
 };
+#endif

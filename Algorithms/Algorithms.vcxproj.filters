@@ -21,9 +21,18 @@
     <ClInclude Include="singlelinkedlist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="doublenode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="doublelinkedlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SingleLinkedListDriver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoubleLinkedListDriver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
