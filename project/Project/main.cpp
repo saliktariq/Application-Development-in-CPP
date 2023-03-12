@@ -5,6 +5,8 @@
 #include "booking.h"
 #include "flight.h"
 #include "passenger.h"
+#include "databasecredentials.h"
+#include "database.h"
 #include <windows.h>
 #include <sstream>
 #include <iomanip>
@@ -229,7 +231,7 @@ void backup_menu() {
 
     int op;
     do {
-
+        system("cls");
         cout << "\033[2;5H\033[1;33;44m  SYSTEM BACKUP  \033[0m";
         cout << "\033[4;6H\033[1;33m------------------\033[0m" << endl;
         cout << "\033[5;6H\033[1;35m1. Backup flight data to disk\033[0m" << endl;
@@ -282,7 +284,7 @@ void json_menu() {
     int ch;
     do {
 
-
+      //  system("cls");
         cout << "\033[2;6H\033[1;33;44m  JSON FEEDS  \033[0m";
         cout << "\033[4;6H\033[1;33m------------------\033[0m" << endl;
         cout << "\033[5;6H\033[1;35m1. View all flights as JSON\033[0m" << endl;
@@ -314,7 +316,7 @@ void json_menu() {
         }
         case 3:
         {
-            json_feed_passengers;
+            json_feed_passengers(passengers);
             break;
 
         }
@@ -330,6 +332,8 @@ void json_menu() {
 }
 
 void print_menu() {
+
+    system("cls");
        
     cout << "\033[2;6H\033[1;33;44;1m  FLIGHT BOOKING  \033[0m";
     cout << "\033[4;6H\033[1;30m------------------\033[0m" << endl;
@@ -349,13 +353,23 @@ void print_menu() {
 
 int main() {
 
+    /* Database credentials*/
+    std::string host = Credentials::LOCALHOST;
+    std::string username = Credentials::USERNAME;
+    std::string password = Credentials::PASSWORD;
+    std::string databaseName = Credentials::DATABASE_NAME;
 
+    /* Instantiating database*/
 
-    print_menu();
+    Database* db = new Database(host, username, password, databaseName);
+
+    /* Connecting the database*/
+
+    db->connect();
 
     int choice;
     do {
-
+        print_menu();
         cout << "\033[17;6H\033[1;33mEnter your choice:\033[0m";
         cin >> choice;
 
@@ -376,9 +390,13 @@ int main() {
             getline(cin, address);
             passengers.push_back(Passenger(id, name, email, password, address));
             cout << "Your passenger account has been created successfully!\n";
+            db->addPassenger(name, email, password, address);
+            cout << "\nPassenger account created in the server!\n";
             break;
         }
         case 2: {
+
+            
             int id, capacity;
             string departure, arrival, date, time;
             double price;
@@ -399,6 +417,8 @@ int main() {
             cin >> capacity;
             flights.push_back(Flight(id, departure, arrival, date, time, price, capacity));
             cout << "New flight is successfully added to system!\n";
+            db->addFlight(departure, arrival, date, time, price, capacity);
+            cout << "\Flight added to the server!\n";
             break;
         }
         case 3: {
@@ -418,6 +438,8 @@ int main() {
             cin >> paid;
             bookings.push_back(Booking(id, flights[flightId], passengers[passengerId], seatNum, upgrade, paid));
             cout << "Your flight booking is created!\n";
+            db->addBooking(flightId, passengerId, seatNum, upgrade, paid);
+            cout << "\nYour booking is added to the server!\n";
             break;
         }
         case 4: {
@@ -425,6 +447,7 @@ int main() {
             for (const Passenger& passenger : passengers) {
                 cout << passenger.toString() << endl;
             }
+
             break;
         }
         case 5: {
@@ -495,5 +518,9 @@ int main() {
         }
         }
     } while (choice != 0);
+
+
+    /* Disconnecting database */
+    db->disconnect();
     return 0;
 }

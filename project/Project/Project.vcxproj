@@ -138,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="airlinebookingsystem.h" />
     <ClInclude Include="database.h" />
+    <ClInclude Include="databasecredentials.h" />
     <ClInclude Include="flight.h" />
     <ClInclude Include="booking.h" />
     <ClInclude Include="passenger.h" />

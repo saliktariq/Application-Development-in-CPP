@@ -44,5 +44,8 @@
     <ClInclude Include="airlinebookingsystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="databasecredentials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

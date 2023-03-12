@@ -50,7 +50,7 @@ public:
 
     void addFlight(const std::string& departure, const std::string& arrival, const std::string& date, const std::string& time, double price, int seatsAvailable) {
         try {
-            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("INSERT INTO flights(departure, arrival, date, time, price, seats_available) VALUES(?,?,?,?,?,?)"));
+            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("INSERT INTO flight(departure, arrival, date, time, price, seats_available) VALUES(?,?,?,?,?,?)"));
             pstmt->setString(1, departure);
             pstmt->setString(2, arrival);
             pstmt->setString(3, date);
@@ -66,7 +66,7 @@ public:
 
     void updateFlight(int id, const std::string& departure, const std::string& arrival, const std::string& date, const std::string& time, double price, int seatsAvailable) {
         try {
-            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("UPDATE flights SET departure=?, arrival=?, date=?, time=?, price=?, seats_available=? WHERE id=?"));
+            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("UPDATE flight SET departure=?, arrival=?, date=?, time=?, price=?, seats_available=? WHERE id=?"));
             pstmt->setString(1, departure);
             pstmt->setString(2, arrival);
             pstmt->setString(3, date);
@@ -85,7 +85,7 @@ public:
         std::vector<Flight> flights;
         try {
             std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement(
-                "SELECT * FROM flights WHERE departure=? AND arrival=? AND date=?"
+                "SELECT * FROM flight WHERE departure=? AND arrival=? AND date=?"
             ));
             pstmt->setString(1, departure);
             pstmt->setString(2, arrival);
@@ -112,7 +112,7 @@ public:
 
     void addPassenger(std::string name, std::string email, std::string password, std::string address) {
         try {
-            sql::PreparedStatement* pstmt = connection_->prepareStatement("INSERT INTO passengers (name, email, password, address) VALUES (?, ?, ?, ?)");
+            sql::PreparedStatement* pstmt = connection_->prepareStatement("INSERT INTO passenger (name, email, password, address) VALUES (?, ?, ?, ?)");
             pstmt->setString(1, name);
             pstmt->setString(2, email);
             pstmt->setString(3, password);
@@ -133,7 +133,7 @@ public:
 
     void addBooking(int flightId, int passengerId, int seatNum, bool upgrade, bool paid) {
         try {
-            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("INSERT INTO bookings(flight_id, passenger_id, seat_num, upgrade, paid) VALUES (?, ?, ?, ?, ?)"));
+            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("INSERT INTO booking(flight_id, passenger_id, seat_num, upgrade, paid) VALUES (?, ?, ?, ?, ?)"));
             pstmt->setInt(1, flightId);
             pstmt->setInt(2, passengerId);
             pstmt->setInt(3, seatNum);
@@ -149,7 +149,7 @@ public:
 
     void updateBooking(int id, int seatNum, bool upgrade, bool paid) {
         try {
-            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("UPDATE bookings SET seat_num = ?, upgrade = ?, paid = ? WHERE id = ?"));
+            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("UPDATE booking SET seat_num = ?, upgrade = ?, paid = ? WHERE id = ?"));
             pstmt->setInt(1, seatNum);
             pstmt->setBoolean(2, upgrade);
             pstmt->setBoolean(3, paid);
@@ -164,7 +164,7 @@ public:
 
     void deleteBooking(int id) {
         try {
-            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("DELETE FROM bookings WHERE id = ?"));
+            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("DELETE FROM booking WHERE id = ?"));
             pstmt->setInt(1, id);
             pstmt->executeUpdate();
         }
@@ -177,7 +177,7 @@ public:
 
         Passenger passenger = Passenger(-1, "", "", "", "");
         try {
-            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("SELECT * FROM passengers WHERE email = ? AND password = ?"));
+            std::unique_ptr<sql::PreparedStatement> pstmt(connection_->prepareStatement("SELECT * FROM passenger WHERE email = ? AND password = ?"));
             pstmt->setString(1, email);
             pstmt->setString(2, password);
             std::unique_ptr<sql::ResultSet> res(pstmt->executeQuery());
