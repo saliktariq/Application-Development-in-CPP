@@ -5,6 +5,7 @@
 
 int main() {
     DoubleLinkedList list;
+       
 
     int choice = 0;
     do {

@@ -71,7 +71,7 @@ public:
         size++;
     }
     void insertAt(int index, int data) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index > size+1) {
             std::cout << "\nIndex out of range\n";
             return;
         }
@@ -165,8 +165,8 @@ public:
 
     //Function to retrieve a node at given index. Note: Index is implemented using private variable size / getSize() function.
     DoubleNode* getNodeAt(int index) const {
-        if (index < 0 || index > size) {
-            std::cout << "\nIndex out of range\n";
+        if (index < 0 || index > size+1) {
+            std::cout << "\nIndex out of range \n";
             return nullptr;
         }
 
@@ -178,34 +178,119 @@ public:
     }
 
     void swapNodes(DoubleNode* node1, DoubleNode* node2) {
-    //:TODO
+        if (node1 == nullptr || node2 == nullptr || node1 == node2) {
+            return;
+        }
+
+        if (node1->next == node2) {
+            node1->next = node2->next;
+            node2->next = node1;
+            node2->previous = node1->previous;
+            node1->previous = node2;
+
+            if (node1->next != nullptr) {
+                node1->next->previous = node1;
+            }
+            else {
+                tail = node1;
+            }
+            if (node2->previous != nullptr) {
+                node2->previous->next = node2;
+            }
+            else {
+                head = node2;
+            }
+
+            return;
+        }
+
+        if (node2->next == node1) {
+            node2->next = node1->next;
+            node1->next = node2;
+            node1->previous = node2->previous;
+            node2->previous = node1;
+
+            if (node2->next != nullptr) {
+                node2->next->previous = node2;
+            }
+            else {
+                tail = node2;
+            }
+            if (node1->previous != nullptr) {
+                node1->previous->next = node1;
+            }
+            else {
+                head = node1;
+            }
+
+            return;
+        }
+
+        DoubleNode* temp_prev = node1->previous;
+        DoubleNode* temp_next = node1->next;
+
+        node1->previous = node2->previous;
+        node1->next = node2->next;
+        node2->previous = temp_prev;
+        node2->next = temp_next;
+
+        if (node1->previous != nullptr) {
+            node1->previous->next = node1;
+        }
+        else {
+            head = node1;
+        }
+        if (node1->next != nullptr) {
+            node1->next->previous = node1;
+        }
+        else {
+            tail = node1;
+        }
+        if (node2->previous != nullptr) {
+            node2->previous->next = node2;
+        }
+        else {
+            head = node2;
+        }
+        if (node2->next != nullptr) {
+            node2->next->previous = node2;
+        }
+        else {
+            tail = node2;
+        }
     }
 
 
+
+
     void sort() {
+
         if (size == -1 || size == 0) { //if list is empty or has only one node, no need to sort
             return;
         }
 
-        bool swapped = false;
-        do {
-            swapped = false;
-            DoubleNode* current = head;
-            while (current->next != nullptr) {
-                if (current->data > current->next->data) {
-                    int temp = current->data;
-                    current->data = current->next->data;
-                    current->next->data = temp;
-                    swapped = true;
-                    if (current->previous != nullptr) {
-                        current = current->previous;
-                    }
-                }
-                else {
-                    current = current->next;
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j <= size; j++) {
+                if (getNodeAt(i)->data > getNodeAt(j)->data) {
+                    swapNodes(getNodeAt(i), getNodeAt(j));
                 }
             }
-        } while (swapped);
+        }
+
+        /* In this implementation only data is swapped*/
+        //if (size == -1 || size == 0) { //if list is empty or has only one node, no need to sort
+        //    return;
+        //}
+        //for (DoubleNode* i = head; i->next != nullptr; i = i->next) {
+        //    for (DoubleNode* j = i->next; j != nullptr; j = j->next) {
+        //        if (i->data > j->data) {
+        //            int temp = i->data;
+        //            i->data = j->data;
+        //            j->data = temp;
+        //        }
+        //    }
+        //}
+
     }
 
 
