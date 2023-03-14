@@ -96,25 +96,21 @@ void ExecuteMenu(char option, ShoppingCart& theCart) {
 		string itemName;
 		cin.ignore();
 		getline(cin, itemName);
-
+		bool found = false;
 		for (int i = 0; i < theCart.GetNumItemsInCart(); i++) {
 			if (theCart.GetCartItems()[i].GetName() == itemName) {
-				ItemToPurchase tempItem = theCart.GetCartItems()[i];
-				ItemToPurchase temp2 = tempItem;
-				theCart.RemoveItem(itemName);
 				int newQuantity = 0;
-				std::cout << "Enter the new quantity:" << endl;
-				
+				std::cout << "Enter the new quantity:" << endl;		
 				cin >> newQuantity;
-				temp2.SetQuantity(newQuantity);
-				theCart.AddItem(temp2);
-
-			}
-			else {
-				cout << "Item not found in cart. Nothing modified." << endl;
-
+				theCart.GetCartItems()[i].SetQuantity(newQuantity);
+				found = true;
+				break;
 			}
 
+		}
+
+		if (!found) {
+			cout << "Item not found in cart. Nothing modified." << endl;
 		}
 		break;
 	}

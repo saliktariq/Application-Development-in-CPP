@@ -1,3 +1,2 @@
-﻿  ShoppingCart.cpp
-C:\githubrepositories\Application-Development-in-CPP\Online_Shopping_Cart\ShoppingCart.cpp(82,25): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+﻿  main.cpp
   Online_Shopping_Cart.vcxproj -> C:\githubrepositories\Application-Development-in-CPP\Online_Shopping_Cart\x64\Debug\Online_Shopping_Cart.exe
