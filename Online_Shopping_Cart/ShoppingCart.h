@@ -15,6 +15,7 @@ private:
 public:
 	ShoppingCart();
 	ShoppingCart(string customerName, string currentDate);
+	vector<ItemToPurchase>& GetCartItems();
 
 	string GetCustomerName() const;
 	string GetDate() const;
