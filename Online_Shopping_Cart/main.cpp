@@ -64,7 +64,7 @@ void ExecuteMenu(char option, ShoppingCart& theCart) {
 		getline(cin, itemName); 
 		
 		std::cout << "Enter the item description:" << endl;	
-		cin.ignore();
+		//cin.ignore();
 		getline(cin, description);
 		
 		std::cout << "Enter the item price:" << endl;
@@ -96,12 +96,13 @@ void ExecuteMenu(char option, ShoppingCart& theCart) {
 		string itemName;
 		cin.ignore();
 		getline(cin, itemName);
+		int newQuantity = 0;//moved from inside the loop
+		std::cout << "Enter the new quantity:" << endl;//moved from inside the loop
+		cin >> newQuantity;//moved from inside the loop
 		bool found = false;
 		for (int i = 0; i < theCart.GetNumItemsInCart(); i++) {
 			if (theCart.GetCartItems()[i].GetName() == itemName) {
-				int newQuantity = 0;
-				std::cout << "Enter the new quantity:" << endl;		
-				cin >> newQuantity;
+				
 				theCart.GetCartItems()[i].SetQuantity(newQuantity);
 				found = true;
 				break;
