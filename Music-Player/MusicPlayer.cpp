@@ -26,13 +26,14 @@ std::vector<std::string> getPlaylist(std::string directory) {
 void PlayMusic(std::atomic<bool>& is_playing) {
     std::vector<std::string> playlist = getPlaylist(".\\music");
     int songIndex = 1;
-    for (const auto &song : playlist) {       
+    for (const auto& song : playlist) {
         cout << songIndex << " : " << song << endl;
         songIndex++;
     }
 
     int choice = 0;
-    cout << "Enter the song number to play: " << endl;
+    std::cout << "\nspace bar: Pause music" << std::endl;
+    cout << "\nEnter the song number to play: " << endl;
     cin >> choice;
 
     // Convert selected song name to wide string
@@ -44,20 +45,32 @@ void PlayMusic(std::atomic<bool>& is_playing) {
     // Open the file
     wchar_t command[256];
     wsprintf(command, L"open \"%s\" type mpegvideo alias MyMusic", wideSelectedSong.data());
-
-
     mciSendString(command, NULL, 0, NULL);
 
     // Play the file
     mciSendString(L"play MyMusic", NULL, 0, NULL);
 
-    // Wait for the file to finish playing or for the thread to be stopped
+    bool is_paused = false;
     while (is_playing) {
         Sleep(1000);
         wsprintf(command, L"status MyMusic length");
         mciSendString(command, NULL, 0, NULL);
+
         if (std::wcscmp(command, L"0") == 0) {
             is_playing = false;
+            break;
+        }
+
+        // Check for spacebar key press to pause or resume playing
+        if (GetAsyncKeyState(VK_SPACE) & 0x8000) {
+            if (!is_paused) {
+                mciSendString(L"pause MyMusic", NULL, 0, NULL);
+                is_paused = true;
+            }
+            else {
+                mciSendString(L"resume MyMusic", NULL, 0, NULL);
+                is_paused = false;
+            }
         }
     }
 
@@ -65,6 +78,7 @@ void PlayMusic(std::atomic<bool>& is_playing) {
     mciSendString(L"stop MyMusic", NULL, 0, NULL);
     mciSendString(L"close MyMusic", NULL, 0, NULL);
 }
+
 
 int main() {
     bool exit_program = false;
@@ -74,6 +88,7 @@ int main() {
         std::cout << "Menu:" << std::endl;
         std::cout << "  p: Play music" << std::endl;
         std::cout << "  s: Stop music" << std::endl;
+
         std::cout << "  q: Quit program" << std::endl;
 
         char input;
