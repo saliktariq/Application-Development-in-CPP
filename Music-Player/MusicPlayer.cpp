@@ -7,8 +7,18 @@
 #include <vector>
 #include <iostream>
 #include <filesystem>
+
+
 namespace fs = std::filesystem;
 using namespace std;
+
+void set_random_background_color() {
+    srand(time(0)); // Seed the random number generator with the current time
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    int random_color = (rand() % 8) + 1; // Generate a random number between 1 and 8
+    random_color = random_color << 4; // Shift the bits to set the background color
+    SetConsoleTextAttribute(hConsole, random_color);
+}
 
 std::vector<std::string> getPlaylist(std::string directory) {
 
@@ -27,13 +37,22 @@ void PlayMusic(std::atomic<bool>& is_playing) {
     std::vector<std::string> playlist = getPlaylist(".\\music");
     int songIndex = 1;
     for (const auto& song : playlist) {
-        cout << songIndex << " : " << song << endl;
+        std::cout << "\033[1;36m"; // Set text color to bright cyan
+        std::cout << songIndex << " : ";
+        std::cout << "\033[0;36m"; // Set text color to cyan
+        std::cout << song << std::endl;
+        std::cout << "\033[0m"; // Reset text color
         songIndex++;
     }
 
     int choice = 0;
-    std::cout << "\nspace bar: Pause music" << std::endl;
-    cout << "\nEnter the song number to play: " << endl;
+    std::cout << "\033[1;33m"; // Set text color to bright yellow
+    std::cout << "\nspace bar: \033[0;33mPause music\033[1;33m" << std::endl;
+    std::cout << "\033[0m"; // Reset text color
+    std::cout << "\033[1;36m"; // Set text color to bright cyan
+    cout << "\nEnter the \033[0;36msong number\033[1;36m to play: " << endl;
+    std::cout << "\033[0m"; // Reset text color
+
     cin >> choice;
 
     // Convert selected song name to wide string
@@ -50,9 +69,13 @@ void PlayMusic(std::atomic<bool>& is_playing) {
     // Play the file
     mciSendString(L"play MyMusic", NULL, 0, NULL);
 
+   
+
+
     bool is_paused = false;
     while (is_playing) {
         Sleep(1000);
+        
         wsprintf(command, L"status MyMusic length");
         mciSendString(command, NULL, 0, NULL);
 
@@ -81,27 +104,45 @@ void PlayMusic(std::atomic<bool>& is_playing) {
 
 
 int main() {
+
+
     bool exit_program = false;
 
     while (!exit_program) {
         system("cls");
-        std::cout << "Menu:" << std::endl;
+        set_random_background_color();
+        std::cout << "  __  __           _      " << std::endl;
+        std::cout << " |  \\/  |_   _ ___(_) ___ " << std::endl;
+        std::cout << " | |\\/| | | | / __| |/ __|" << std::endl;
+        std::cout << " | |  | | |_| \\__ \\ | (__ " << std::endl;
+        std::cout << " |_|  |_|\\__,_|___/_|\\___|" << std::endl;
+
+
+        std::cout << "\n\n";
+
+        std::cout << "\033[1;36m"; // Set text color to bright cyan
+        std::cout << "  Menu:" << std::endl;
+        std::cout << "\033[0;36m"; // Set text color to cyan
         std::cout << "  p: Play music" << std::endl;
         std::cout << "  s: Stop music" << std::endl;
-
         std::cout << "  q: Quit program" << std::endl;
+        std::cout << "\033[1;33m"; // Set text color to bright yellow
+        std::cout << "\nPress 'S' at any time to stop the music\n";
+        std::cout << "\033[0m"; // Reset text color
 
         char input;
         std::cin >> input;
 
         switch (input) {
         case 'p': {
+            
             std::atomic<bool> is_playing(true);
             std::thread music_thread(PlayMusic, std::ref(is_playing));
 
             while (true) {
                 if (GetAsyncKeyState('S') & 0x8000) {
                     is_playing = false;
+
                     break;
                 }
             }
@@ -113,6 +154,11 @@ int main() {
             std::cout << "Stopping music..." << std::endl;
             mciSendString(L"stop MyMusic", NULL, 0, NULL);
             mciSendString(L"close MyMusic", NULL, 0, NULL);
+
+            // Reset the console color to the default
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            SetConsoleTextAttribute(hConsole, 15);
+
             break;
         }
         case 'q': {
@@ -120,7 +166,9 @@ int main() {
             break;
         }
         default: {
+            std::cout << "\033[1;31m"; // Set text color to bright red
             std::cout << "Invalid input!" << std::endl;
+            std::cout << "\033[0m"; // Reset text color
             break;
         }
         }
@@ -130,3 +178,4 @@ int main() {
 
     return 0;
 }
+

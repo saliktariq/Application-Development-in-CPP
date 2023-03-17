@@ -54,8 +54,10 @@ public:
 int main() {
     // Initialize the nodes
     std::vector<Node> nodes;
+    std::cout << "Initialising nodes: ";
     for (int i = 0; i < NUM_NODES; ++i) {
         nodes.push_back(Node(i));
+        std::cout << i << std::endl;
     }
 
     // Generate a random proposal number and value
@@ -63,13 +65,19 @@ int main() {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> proposalDist(1, 100);
     std::uniform_int_distribution<> valueDist(1, 100);
+    
     int proposalNumber = proposalDist(gen);
+    std::cout << "Random Proposal Number: " << proposalNumber;
+    
     int proposedValue = valueDist(gen);
+    std::cout << "\nRandom Proposal Value: " << std::endl;
 
     // Prepare phase: Send prepare messages to all nodes and collect their responses on separate threads
     std::vector<std::pair<int, int>> prepareResponses;
     std::vector<std::thread> prepareThreads;
+    std::cout << "Sending prepare messages to all nodes and collect their responses on separate threads" << std::endl;
     for (auto& node : nodes) {
+        std::cout << "Node:" << (node.id) << "   Proposal Number: " << proposalNumber << std::endl;
         prepareThreads.emplace_back([&prepareResponses, &node, proposalNumber]() {
             prepareResponses.push_back(node.prepare(proposalNumber));
             });
@@ -79,6 +87,7 @@ int main() {
     }
 
     // Find the highest accepted value among the responses
+
     auto maxResponse = std::max_element(prepareResponses.begin(), prepareResponses.end());
     if (maxResponse->second != -1) {
         proposedValue = maxResponse->second;
@@ -88,7 +97,9 @@ int main() {
     std::vector<bool> acceptResponses;
     std::vector<std::thread> acceptThreads;
     for (auto& node : nodes) {
+        std::cout << "\nSending accept messages with the proposed value to all nodes and collect their responses on separate threads" << std::endl;
         acceptThreads.emplace_back([&acceptResponses, &node, proposalNumber, proposedValue]() {
+            std::cout << "\nNode number: " << node.id << " Proposal number: " << proposalNumber << " Proposal value: " << proposedValue << std::endl;
             acceptResponses.push_back(node.accept(proposalNumber, proposedValue));
             });
     }
