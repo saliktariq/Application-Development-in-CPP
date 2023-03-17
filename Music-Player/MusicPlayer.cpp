@@ -6,14 +6,49 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <filesystem>
+namespace fs = std::filesystem;
+using namespace std;
+
+std::vector<std::string> getPlaylist(std::string directory) {
+
+    std::vector<std::string> playlist;
+    std::string path = directory; //For example: std::string path = ".\\music";
+
+    for (const auto& entry : fs::directory_iterator(path))
+    {
+        playlist.push_back(entry.path().filename().string());
+    }
+    return playlist;
+}
 
 
 void PlayMusic(std::atomic<bool>& is_playing) {
-    const wchar_t file_name[] = L"BadaCopa.mp3";
+    std::vector<std::string> playlist = getPlaylist(".\\music");
+    int songIndex = 1;
+    for (const auto &song : playlist) {       
+        cout << songIndex << " : " << song << endl;
+        songIndex++;
+    }
+
+    int choice = 0;
+    cout << "Enter the song number to play: " << endl;
+    cin >> choice;
+
+    // Convert selected song name to wide string
+    const std::string& selectedSong = playlist.at(choice - 1);
+    int wideSize = MultiByteToWideChar(CP_UTF8, 0, selectedSong.c_str(), -1, nullptr, 0);
+    std::vector<wchar_t> wideSelectedSong(wideSize);
+    MultiByteToWideChar(CP_UTF8, 0, selectedSong.c_str(), -1, wideSelectedSong.data(), wideSize);
 
     // Open the file
     wchar_t command[256];
-    wsprintf(command, L"open \"%s\" type mpegvideo alias MyMusic", file_name);
+    wsprintf(command, L"open \"%s\" type mpegvideo alias MyMusic", wideSelectedSong.data());
+   // const wchar_t file_name[] = L"BadaCopa.mp3";
+
+    // Open the file
+    //wchar_t command[256];
+    //wsprintf(command, L"open \"%s\" type mpegvideo alias MyMusic", file_name);
 
     mciSendString(command, NULL, 0, NULL);
 
@@ -39,6 +74,7 @@ int main() {
     bool exit_program = false;
 
     while (!exit_program) {
+        system("cls");
         std::cout << "Menu:" << std::endl;
         std::cout << "  p: Play music" << std::endl;
         std::cout << "  s: Stop music" << std::endl;
