@@ -1,9 +1,12 @@
-#include <iostream>
 #include <Windows.h>
 #include <mmsystem.h>
 #include <thread>
 #include <atomic>
 #pragma comment(lib, "winmm.lib")
+#include <string>
+#include <vector>
+#include <iostream>
+
 
 void PlayMusic(std::atomic<bool>& is_playing) {
     const wchar_t file_name[] = L"BadaCopa.mp3";
@@ -11,6 +14,7 @@ void PlayMusic(std::atomic<bool>& is_playing) {
     // Open the file
     wchar_t command[256];
     wsprintf(command, L"open \"%s\" type mpegvideo alias MyMusic", file_name);
+
     mciSendString(command, NULL, 0, NULL);
 
     // Play the file
@@ -32,21 +36,50 @@ void PlayMusic(std::atomic<bool>& is_playing) {
 }
 
 int main() {
-    std::atomic<bool> is_playing(true);
+    bool exit_program = false;
 
-    // Start the music playing thread
-    std::thread music_thread(PlayMusic, std::ref(is_playing));
+    while (!exit_program) {
+        std::cout << "Menu:" << std::endl;
+        std::cout << "  p: Play music" << std::endl;
+        std::cout << "  s: Stop music" << std::endl;
+        std::cout << "  q: Quit program" << std::endl;
 
-    // Wait for user to stop the music thread
-    while (true) {
-        if (GetAsyncKeyState('S') & 0x8000) {
-            is_playing = false;
+        char input;
+        std::cin >> input;
+
+        switch (input) {
+        case 'p': {
+            std::atomic<bool> is_playing(true);
+            std::thread music_thread(PlayMusic, std::ref(is_playing));
+
+            while (true) {
+                if (GetAsyncKeyState('S') & 0x8000) {
+                    is_playing = false;
+                    break;
+                }
+            }
+
+            music_thread.join();
             break;
         }
-    }
+        case 's': {
+            std::cout << "Stopping music..." << std::endl;
+            mciSendString(L"stop MyMusic", NULL, 0, NULL);
+            mciSendString(L"close MyMusic", NULL, 0, NULL);
+            break;
+        }
+        case 'q': {
+            exit_program = true;
+            break;
+        }
+        default: {
+            std::cout << "Invalid input!" << std::endl;
+            break;
+        }
+        }
 
-    // Wait for the music thread to finish and join
-    music_thread.join();
+        std::cout << std::endl;
+    }
 
     return 0;
 }
