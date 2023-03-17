@@ -44,11 +44,7 @@ void PlayMusic(std::atomic<bool>& is_playing) {
     // Open the file
     wchar_t command[256];
     wsprintf(command, L"open \"%s\" type mpegvideo alias MyMusic", wideSelectedSong.data());
-   // const wchar_t file_name[] = L"BadaCopa.mp3";
 
-    // Open the file
-    //wchar_t command[256];
-    //wsprintf(command, L"open \"%s\" type mpegvideo alias MyMusic", file_name);
 
     mciSendString(command, NULL, 0, NULL);
 
